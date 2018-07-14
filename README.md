@@ -14,6 +14,7 @@ A captcha generator written in JavaScript and HTML. Generates a Captcha image co
 
 6. Choose to open the project with a web browser.
 
+## What will happen
 A captcha image will be generated as well as a box prompting for the captcha.
 If the right captcha is entered a message will be displayed prompting the user that the right captcha was entered, else a message will be displayed asking whether or not the user is a bot.
 A message is also generated onto the canvas, the message will vary depending on whether or not the user enters the correct captcha in relation to the image.
