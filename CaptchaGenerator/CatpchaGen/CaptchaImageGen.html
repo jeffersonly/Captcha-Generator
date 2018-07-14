@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+         <head>
+         <title> Captcha Generator </title>
+             <script type="text/javascript">
+                 function Captcha(){
+                	 
+                     var alpha = new Array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0');
+                     var i;
+                     for (i=0;i<6;i++){
+                       var firstChar = alpha[Math.floor(Math.random() * alpha.length)];
+                       var secondChar = alpha[Math.floor(Math.random() * alpha.length)];
+                       var thirdChar = alpha[Math.floor(Math.random() * alpha.length)];
+                       var fourthChar = alpha[Math.floor(Math.random() * alpha.length)];
+                       var fifthChar = alpha[Math.floor(Math.random() * alpha.length)];
+                       var sixthChar = alpha[Math.floor(Math.random() * alpha.length)];
+                       var seventhChar = alpha[Math.floor(Math.random() * alpha.length)];
+                      }
+                    var code = firstChar + secondChar + thirdChar + fourthChar + fifthChar + sixthChar + seventhChar;
+                    document.getElementById("mainCaptcha").value = code
+                    
+                    //Borrowed from https://www.w3schools.com/graphics/canvas_text.asp
+                    var canvas = document.getElementById("canvas");
+                    var context = canvas.getContext("2d");
+                    var width = 500;
+                    var height = 100;
+                    var warp = 2 + Math.floor(Math.random() * 6);
+                    
+                    var fontSizes = new Array(60,65,70,75,80,85,90);
+                    
+                    var fonts = new Array("Arial","Helvetica","Times New Roman","Times","Courier New","Courier","Verdana","Georgia","Palatino","Garamond","Bookman","Comic Sans MS","Trebuchet MS","Arial Black","Impact");
+                    
+                    
+                    var fontSize = fontSizes[Math.floor(Math.random() * fontSizes.length)];
+                    var font = fonts[Math.floor(Math.random() * fonts.length)];
+                    
+                    context.font = fontSize +"px " + font;
+                    
+                    //Borrowed from https://www.w3schools.com/tags/canvas_fill.asp
+                    context.beginPath();
+					context.rect(0, 0, width, height);
+					context.fillStyle = "white";
+					context.fill();
+                    
+					var colors = new Array("red","blue","orange","fuchsia","brown","purple","black","green","navy","teal","olive","maroon");
+                    var color = colors[Math.floor(Math.random() * colors.length)];
+
+					//Borrowed from https://stackoverflow.com/questions/3543687/how-do-i-clear-text-from-the-canvas-element
+                    context.fillStyle = color; 
+                    context.fillText(code, 50, 80);
+                    
+                    for(var j = 0; j < width; j++){
+                		var pixel = context.getImageData(j, 0, 1, height);
+                		context.putImageData(pixel, j, 2*Math.sin(j/warp));
+                	}
+                    
+                  }
+                  function ValidCaptcha(){
+                  
+                      var string1 = document.getElementById('mainCaptcha').value;
+                      var string2 = document.getElementById('txtInput').value;
+                      if (string1 == string2){
+                     	document.getElementById('success').innerHTML = "Correct captcha has been entered!";
+                        return "Correct Captcha has been entered!";
+                      }
+                      else{  
+                      document.getElementById('fail').innerHTML = "The captcha entered is incorrect. Please generate a new Captcha and enter it.";      
+                        return "Are you a bot???";
+                      }
+                  }
+                  
+             </script>    
+        </head>
+     <body onload="Captcha();">
+        <table> 
+        	<h1> Captcha Generator  </h1>
+          <tr>
+          </tr>
+          <tr>
+           <td>
+          
+           	<canvas id="canvas" width="500" height="100"
+				style="border:1px solid #d3d3d3;">
+			</canvas>
+			
+			
+             <br> Text Captcha: <input type="text" id="mainCaptcha"/>    	
+             <br> Generate a different Captcha: <input type="button" id="New Captcha" value="New Captcha" onclick="Captcha();" />
+           </td>
+          </tr>
+          <tr>
+           <td>
+            <br> Please enter the captcha here: <input type="text" id="txtInput"/>    
+          </td>
+         </tr>
+         <tr>
+          <td>
+            <input id="Button1" type="button" value="Check" onclick="alert(ValidCaptcha());"/>
+          </td>
+        </tr>
+        <tr>
+           <td><span id="fail" style="color:red"></span></td>
+        </tr>
+         <tr>
+           <td><span id="success" style="color:green"></span></td>
+         </tr>
+      </table>
+    </body>
+ </html>
