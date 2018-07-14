@@ -1,7 +1,7 @@
 # Captcha-Generator
 A captcha generator written in JavaScript and HTML. Generates a Captcha image containing 7 characters, these characters consist of randomized letters and digits (0-9, A-Z, a-z).
 
-##How to run the program
+## How to run the program
 1. Insert code into a javascript-running ide such as Eclipse.
 
 2. Create a new javascript project.
